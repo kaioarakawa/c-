@@ -32,6 +32,19 @@ int contdes=0;
 	random[9]=0;
 //	tela de inicio do jogo
 		printf("Iniciando o Jogo!!");
+		  Beep (330,100);Sleep(100);
+        Beep (330,100);Sleep(300);
+        Beep (330,100);Sleep(300);
+        Beep (262,100);Sleep(100);
+        Beep (330,100);Sleep(300);
+        Beep (392,100);Sleep(700);
+        Beep (196,100);Sleep(700);
+        Beep (262,300);Sleep(300);
+        Beep (196,300);Sleep(300);
+        Beep (164,300);Sleep(300);
+        Beep (220,300);Sleep(100);
+        Beep (246,100);Sleep(300);
+        Beep (233,200);
 	system("cls");
 	printf("--------------------------------------Ola Bem vindo a Racer KTBL----------------------------------------------\n\n\n\n");
 	printf("Regras do jogo\n");
@@ -58,7 +71,7 @@ for(;;){
 		break;
 	}
 //	if para terminar com game over
-	if(contcrash==2 || contdes==10){
+	if(contcrash==2 ){
 		system("cls");
 		system("color 04");
 		printf("\n\n\nGAME OVERR\n\n\n");
@@ -78,52 +91,65 @@ for(;;){
 		printf("\n\n\nGAME OVERR\n\n\n");
 		system("cls");
 		printf("\n\n\nGAME OVERR\n\n\n");
-		
-		Sleep(2000);
+//		beep de star wars
+		Beep (392,350);Sleep(100);
+        Beep (392,350);Sleep(100);
+        Beep (392,350);Sleep(100);
+        Beep (311,250);Sleep(100);
+        Beep (466,25);Sleep(100);
+        Beep (392,350);Sleep(100);
+        Beep (311,250);Sleep(100);
+        Beep (466,25);Sleep(100);
+        Beep (392,700);Sleep(100);
+        Beep (587,350);Sleep(100);
+        Beep (587,350);Sleep(100);
+        Beep (587,350);Sleep(100);
+        Beep (622,250);
 		break;
 	}
 	fflush(stdin);
+//	verificar se tem alguma tecla sendo pressionada
 	while(!kbhit()){
-		
+//			verifica se esta parado ou desacelerando
 			if(velocidade < 1){
 				printf("Parado!!\n\n");
 				contdes++;
-					if(contdes==30){
-					system("cls");
-					system("color 04");
-					printf("\n\n\nGAME OVERR\n\n\n");
-					Sleep(150);
-					system("cls");
-					system("color 07");
-					printf("\n\n\nGAME OVERR\n\n\n");
-					Sleep(150);
-					system("cls");
-					system("color 07");
-					printf("\n\n\nGAME OVERR\n\n\n");
-					Sleep(150);
-					system("cls");
-					system("color 04");
-					printf("\n\n\nGAME OVERR\n\n\n");
-					system("cls");
-					printf("\n\n\nGAME OVERR\n\n\n");
-					system("cls");
-					printf("\n\n\nGAME OVERR\n\n\n");
-		
-					Sleep(2000);
-					break;
-					return(0);
+				if(contdes==30){
 
+						system("color 04");
+			printf("\n\n\nOCIOSO\n\n\n");
+			Sleep(150);
+			system("cls");
+			system("color 07");
+			printf("\n\n\nOCIOSO\n\n\n");
+			Sleep(150);
+			system("cls");
+			system("color 07");
+			printf("\n\n\nOCIOSO\n\n\n");
+			Sleep(150);
+			system("cls");
+			system("color 04");
+			printf("\n\n\nOCIOSO\n\n\n");
+			system("cls");
+			printf("\n\n\nOCIOSO\n\n\n");
+			system("cls");
+			printf("\n\n\nOCIOSO\n\n\n");
+			system("color 0F");
+		
+			Sleep(2000);
 				}
+
 			}else{
 				printf("Desacelerando!! ----------------- %i Km/h \n\n",velocidade);
 				velocidade--;
-				contdes++;
 			}
 			Sleep(150);
 	}
+//		verificação se tem alguma tecla sendo pressionada
 		while(kbhit()){
 		tecla[0]=getch();
-		if(strcmp(tecla,"w")==1){
+//		tecla se para acelerar
+		if(strcmp(tecla,"w")==1 || strcmp(tecla,"W")==1){
 
 				if(velocidade > 350){
 					printf("Velocidade Maxima !!!\n\n");
@@ -143,7 +169,7 @@ for(;;){
 						Sleep(300);
 						printf("1\n");
 						
-						
+//						random para saber mudas a curva
 						if(random[i]==1){
 							i++;
 							printf("\n\nPressione a tecla d      Nao Esqueça de Apagar as teclas inportunas!!!\n\n\n");
@@ -166,7 +192,7 @@ for(;;){
 							printf("\n\nPressione a tecla a     Nao Esqueça de Apagar as teclas inportunas!!!\n\n\n");
 							Sleep(700);
 							gets(teclac);
-							if(strcmp(teclac,"a")!=0 ){
+							if(strcmp(teclac,"a")!=0 || strcmp(tecla,"A")==1 ){
 								system("color 4F");
 								Beep(650,500);  
 								contcrash++;
@@ -181,7 +207,7 @@ for(;;){
 				}
 			
 		}
-		}else if(strcmp(tecla,"s")==1) {
+		}else if(strcmp(tecla,"s")==1 || strcmp(tecla,"S")==1) {
 			if(velocidade < 1){
 				printf("Parado!!\n\n");
 				
