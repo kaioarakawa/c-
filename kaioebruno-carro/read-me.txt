@@ -1,0 +1,13 @@
+		
+Alunos: Bruno L, Kaio T.
+
+----------------		Racer KTBL		----------------
+
+
+ 
+	Nossa programa consiste em um jogo de Formula 1, apenas com um carro. Têm-se um carro, que se pressionado a tecla "W", o carro acelera em 1Km/h, "S" reduz a velocidade em 5km/h e "A", "D" são as curvas. Caso não pressionar em nenhuma tecla, o jogo é dado como GAME OVER.
+
+	Se o jogador errar as teclas das curvas (A,D) 2 vezes, o jogo dará como GAME OVER, caso contrário, se ele conseguir passar os 10 obstáculos(curvas) ele vencerá o jogo.
+
+
+
