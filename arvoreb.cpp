@@ -8,14 +8,18 @@ struct no{
 	struct no *esquerda;
 	struct no *direita; 
 	struct no *cima;
+	
 	//direita = próximo elemento e esquerda = elemento anteriror
 };
 void exibirPreOrdem(struct no **lista);
+int profundidade (struct no **lista);
+void EmOrdem(struct no **lista);
+void PosOrdem(struct no **lista);
 int po[9999];
 int k=0;
 int i=0;
 int tamanho=0;
-int profundidade=0;
+int profun=0;
 int valor;
 int type=0;
 
@@ -26,12 +30,7 @@ int main(){
 	int opc=0, valor, cont;
 	lista = NULL;
 	for(;;){
-		if(profundidade<i){
-			profundidade=i;
-		}
-		i=0;
-		printf("Tamanho: %i\n",profundidade);
-		printf("\n\nDigite a opçao desejada: \n1-Insert \n2-Remove \n3-Playlist \n4-Listar \n5-Sair\n\n");
+		printf("\n\nDigite a opçao desejada: \n1-Insert \n2-Remove \n3-Playlist \n4-Listar em pre ordem \n5-Listar em ordem \n6-Listar pos ordem  \n7-Profundidade \n8-Sair\n\n");
 		scanf("%i",&opc);
 		
 		if(opc==1){
@@ -127,15 +126,55 @@ int main(){
 			if(tamanho == 0){
 				printf("Lista Vazia");
 			}else{
+				while(lista->cima!=NULL){
+					lista=lista->cima;
+				}
 				exibirPreOrdem(&lista);
 				printf("\n\nArvore em pre-ordem\n\n");
 				for(i=0;i<k;i++){
 					printf("%i\t",po[i]);
 				}
+				k=0;
 				printf("\n\n\n");
 				system("pause");
 			}
 		}else if(opc==5){
+			if(tamanho == 0){
+				printf("Lista Vazia");
+			}else{
+				while(lista->cima!=NULL){
+					lista=lista->cima;
+				}
+				printf("\n\nArvore em ordem\n\n");
+				EmOrdem(&lista);
+				printf("\n\n\n");
+				system("pause");
+			}
+		}else if(opc==6){
+			if(tamanho == 0){
+				printf("Lista Vazia");
+			}else{
+				while(lista->cima!=NULL){
+					lista=lista->cima;
+				}
+				printf("\n\nArvore em pos ordem\n\n");
+				PosOrdem(&lista);
+				printf("\n\n\n");
+				system("pause");
+			}
+		}else if(opc==7){
+			if(tamanho==0){
+				printf("Lista Vazia");
+			}else{
+				while(lista->cima!=NULL){
+					lista=lista->cima;
+				}
+				profun=profundidade(&lista);
+				printf("Tamanho: %i\n",(profun-1));
+				system("pause");
+			}
+
+		}else if(opc==8){
 			printf("\n\n\n\nFechando a playlist, muito obrigado");
 			break;
 		}else{
@@ -211,25 +250,30 @@ void inserir(struct no **lista){
 						p->esquerda=NULL;
 						p->direita=NULL;
 						pNavegar->esquerda=p;
-						i++;
 						
 				}else{
 					while(p->numero<pNavegar->numero &&  pNavegar->esquerda!=NULL){
 						pNavegar=pNavegar->esquerda;
-						i++;
 					}
 					i++;
 					if(pNavegar->numero<p->numero){
 						while(p->numero>pNavegar->numero &&  pNavegar->direita!=NULL){
 							pNavegar=pNavegar->direita;
-							i++;
 						}
-						vt=pNavegar;
-						p->cima=vt;
-						p->esquerda=NULL;
-						p->direita=NULL;
-						pNavegar->direita=p;
-						
+						if(pNavegar->numero<p->numero){
+							vt=pNavegar;
+							p->cima=vt;
+							p->esquerda=NULL;
+							p->direita=NULL;
+							pNavegar->direita=p;	
+						}else{
+							vt=pNavegar;
+							p->cima=vt;
+							p->esquerda=NULL;
+							p->direita=NULL;
+							pNavegar->esquerda=p;
+							
+						}
 					}else{
 						vt=pNavegar;
 						p->cima=vt;
@@ -248,12 +292,10 @@ void inserir(struct no **lista){
 						p->esquerda=NULL;
 						p->direita=NULL;
 						pNavegar->direita=p;
-						i++;
 						
 				}else{
 					while(pNavegar->numero<p->numero && pNavegar->direita!=NULL){
 						pNavegar=pNavegar->direita;
-						i++;
 					}
 					i++;
 					if(pNavegar->numero<p->numero){
@@ -267,13 +309,20 @@ void inserir(struct no **lista){
 					}else{
 						while(p->numero<pNavegar->numero &&  pNavegar->esquerda!=NULL){
 							pNavegar=pNavegar->esquerda;
-							i++;
 						}
-						vt=pNavegar;
-						p->cima=vt;
-						p->esquerda=NULL;
-						p->direita=NULL;
-						pNavegar->esquerda=p;
+						if(pNavegar->numero<p->numero){
+							vt=pNavegar;
+							p->cima=vt;
+							p->esquerda=NULL;
+							p->direita=NULL;
+							pNavegar->direita=p;
+						}else{
+							vt=pNavegar;
+							p->cima=vt;
+							p->esquerda=NULL;
+							p->direita=NULL;
+							pNavegar->esquerda=p;	
+						}
 					}
 				}
 
@@ -408,6 +457,25 @@ void doisfilhos(struct no **lista){
 	
 }
 
+int profundidade (struct no **lista) {
+	struct no *pNavegar;
+	pNavegar=*lista;
+	int profune;
+	int profund;
+   if (pNavegar == NULL) 
+      return 0;
+   else {
+    	profune = profundidade (&pNavegar->esquerda);
+      	profund = profundidade (&pNavegar->direita);
+	    if (profune < profund){
+	    	return profund + 1;
+		} 
+	    else{
+	    	return profune + 1;
+		} 
+   }
+}
+
 void exibirPreOrdem(struct no **lista){
 	struct no *pNavegar;
 	pNavegar=*lista;
@@ -419,4 +487,22 @@ void exibirPreOrdem(struct no **lista){
     }
 }
 
+void EmOrdem(struct no **lista){
+	struct no *pNavegar;
+	pNavegar=*lista;
+    if(pNavegar != NULL){
+        EmOrdem(&pNavegar->esquerda);
+        printf("\n%i", pNavegar->numero);
+        EmOrdem(&pNavegar->direita);
+    }
+}
 
+void PosOrdem(struct no **lista){
+	struct no *pNavegar;
+	pNavegar=*lista;
+    if(pNavegar != NULL){
+        PosOrdem(&pNavegar->esquerda);
+        PosOrdem(&pNavegar->direita);
+        printf("\n%i", pNavegar->numero);
+    }
+}
